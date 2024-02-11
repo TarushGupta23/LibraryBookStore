@@ -27,19 +27,23 @@ if (isset($_POST['login'])) {
     }
 }
 ?>
-
-<form action="login.php" method="post">
-    <input type="text" name="username" placeholder='username' required id='input-username' class='input-field'>
-    <input type="password" name="password" placeholder='username' required id='input-password' class='input-field'>
-
-    <input type="submit" value="Login" name="login" class='input-button'>
-    <input type="submit" value="Create new Admin" name="signup" class='input-button'>
-    <span class="error-msg">
-    <?php 
-        if (isset($_SESSION['message'])) {
-            echo $_SESSION['message'];
-            unset($_SESSION['message']);
-        }
-    ?>
-    </span>
-</form>
+<link rel="stylesheet" href="style/login.css">
+<div class="container">
+    <form action="login.php" method="post">
+        <h2>Login Page</h2>
+        <input type="text" name="username" placeholder='username' required id='input-username' class='input-field'>
+        <input type="password" name="password" placeholder='passsword' required id='input-password' class='input-field'>
+        <div class="btns">
+            <input type="submit" value="Login" name="login" class='input-button'>
+            <input type="submit" value="New Admin" name="signup" class='input-button'>
+        </div>
+        <span class="error-msg">
+        <?php 
+            if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+            }
+        ?>
+        </span>
+    </form>
+</div>

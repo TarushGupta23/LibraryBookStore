@@ -1,0 +1,122 @@
+* {
+    padding: 0; margin: 0;
+    box-sizing: border-box;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+:root {
+    --primary-color : #0369a0;
+    --secondary-color : white;
+    --primary-d-color : #004971;
+    --accent : #3c8db8;
+    --accent-transparent : #3c8db893;
+}
+.wrap {
+    width: 100vw; height: 100vh;
+    display: flex; flex-direction: column;
+    background-color: var(--accent);
+    color: var(--secondary-color);
+    text-shadow: 3px 3px 0px var(--primary-color);
+    gap: 20px;
+    padding: 20px 40px;
+}
+#logoutBtn {
+    font-size: 20px;
+    width: 100px;
+    align-self: flex-end;
+    padding: 4px 8px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 100px;
+    box-shadow: 2px 2px 0px var(--primary-color);
+}
+form {
+    display: flex; flex-direction: column;
+    gap: 8px;
+}
+h2 {
+    font-size: 30px;
+    margin-bottom: 4px;
+}
+.submitBtn {
+    width: 100px;
+    font-size: 14px;
+    padding: 4px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 100px;
+    box-shadow: 3px 3px 0px var(--primary-color);
+    cursor: pointer;
+    font-weight: bold;
+}
+input[type='text'] {
+    width: 90%;
+    max-width: 600px;
+    font-size: 16px;
+    border: none;
+    border-radius: 100px;
+    box-shadow: 3px 3px 0px var(--primary-color);
+    padding: 4px 12px;
+}
+input::file-selector-button {
+    font-weight: bold;
+    border: none;
+    padding: 2px 8px;
+    background-color: var(--secondary-color);
+    border-radius: 100px;
+    box-shadow: 2px 2px 0px var(--primary-color);
+    cursor: pointer;
+}
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+.tableWrap {
+    overflow: scroll;
+    height: 100%;
+    display: flex;
+    text-shadow: none;
+    color: var(--secondary-color);
+}
+table {
+    border-collapse: collapse;
+}
+table td, table th {
+    border: 2px solid black;
+    padding: 4px 8px;
+    text-align: center;
+    background-color: var(--secondary-color);
+}
+table td {
+    font-size: 14px;
+}
+
+table tr:hover {
+    cursor: pointer;
+}
+table thead tr:hover {
+    background-color: transparent;
+    cursor: default;
+}
+table th {
+    padding: 8px 8px;
+    font-size: 18px;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+table th:nth-child(1) {
+    width: 400px;
+    max-width: 400px;
+    min-width: 400px;
+}
+table th:nth-child(2) {
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+}
+table th:nth-child(3) {
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+}
+table th:nth-child(4) {
+    width: 150px;
+    max-width: 150px;
+    min-width: 150px;
+}
