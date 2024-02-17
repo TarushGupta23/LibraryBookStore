@@ -28,6 +28,7 @@
     border: none;
     border-radius: 100px;
     box-shadow: 2px 2px 0px var(--primary-color);
+    cursor: pointer;
 }
 form {
     display: flex; flex-direction: column;

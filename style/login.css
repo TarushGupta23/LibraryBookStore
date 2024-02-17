@@ -51,3 +51,6 @@ input[type='submit'] {
     width: 120px;
     cursor: pointer;
 }
+.error-msg {
+    font-style: italic;
+}

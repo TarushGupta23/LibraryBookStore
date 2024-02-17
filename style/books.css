@@ -52,7 +52,7 @@ body {
     background-color: var(--primary-color);
     width: 100%;
 }
-.search-bar {
+/* .search-bar {
     padding: 0px 15px;
     background-color: var(--secondary-color);
     border-radius: 100px;
@@ -60,15 +60,15 @@ body {
     justify-content: center; align-items: center;
     width: 100%; height: 35px;
     margin: 12px 0px;
-}
-.searchbar-input {
+} */
+/* .searchbar-input {
     border: none;
     width: 100%;
     font-size: 12px;
     padding: 2px 6px;
     caret-color: var(--accent-transparent);
     outline: none;
-}
+} */
 /* .search-type {
     color: var(--secondary-color);
 }
@@ -140,13 +140,13 @@ body {
     align-items: center; justify-content: space-between;
     gap: 15px;
 }
-.subject-items {
-    display: flex;
+.subject-items, .publisher-items {
+    display: none;
     flex-wrap: wrap;
     gap: 8px;
     list-style: none;
 }
-.subject-item {
+.subject-item, .publisher-item {
     box-shadow: 3px 3px 3px var(--primary-color);
     background-color: var(--secondary-color);
     border-radius: 100px;
@@ -156,18 +156,18 @@ body {
     color: black;
     cursor: pointer;
 }
-.selected-subject {
+.selected-subject, .selected-publisher {
     background-color: var(--primary-d-color);
     color: var(--secondary-color);
 }
-.subj-form {
+.subj-form, .pub-form {
     display: flex;
     gap: 8px;
     flex-direction: row;
     align-items: center; justify-content: space-between;
     margin-bottom: 8px;
 }
-.subject-filter-search {
+.subject-filter-search, .publisher-filter-search {
     font-size: 12px;
     border-radius: 10px;
     border: none;
@@ -177,7 +177,7 @@ body {
     outline: none;
     box-shadow: 3px 3px 3px var(--primary-color);
 }
-.subj-filter-submit {
+.subj-filter-submit, .pub-filter-submit {
     border: none;
     background-color: var(--secondary-color);
     font-size: 12px;
@@ -200,6 +200,16 @@ body {
     border-radius: 100px;
     box-shadow: 3px 3px 0px var(--primary-color);
     cursor: pointer;
+}
+.searchbar-input {
+    font-size: 12px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    padding: 3px 8px;
+    caret-color: var(--accent);
+    outline: none;
+    box-shadow: 3px 3px 3px var(--primary-color);
 }
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 .tableWrap {

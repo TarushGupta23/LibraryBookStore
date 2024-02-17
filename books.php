@@ -19,14 +19,30 @@
     } else {
         $query = "select * from books where 1";
     }
+
     if (isset($_POST['subjects'])) {
         $selectedSubjects = $_POST['subjects'];
         $condition = "Subject IN ('" . implode("', '", $selectedSubjects) . "')";
     } else {
         $condition = "1";
     }
-    $queryFinal = $query . " and " . $condition;
+
+    if (isset($_POST['publishers'])) {
+        $selectedPublishers = $_POST['publishers'];
+        $condition2 = "Publisher IN ('" . implode("', '", $selectedPublishers) . "')";
+    } else {
+        $condition2 = "1";
+    }
+
+    if (isset($_POST['searchName']) && $_POST['searchName'] != "") {
+        $nameCondition = "title LIKE '%".$_POST['searchName']."%'";
+    } else {
+        $nameCondition = "1";
+    }
+    $queryFinal = $query . " and " . $condition . " and " . $condition2 . " and " . $nameCondition;
     $result = $conn->query($queryFinal);
+
+// --------------------------------------------------------------------------------------------------------
     if (isset($_POST['subjNameFind']) && $_POST['subjNameFind'] != "") {
         $subjQuery = "select distinct subject from books where subject LIKE '%" . $_POST['subjNameFind'] . "%' ORDER BY subject ASC";
     } else {
@@ -34,11 +50,26 @@
     }
     $resultSubjList = $conn->query($subjQuery);
     $resultSubjList2 = $conn->query($subjQuery);
+
+    if (isset($_POST['pubNameFind']) && $_POST['pubNameFind'] != "") {
+        $pubQuery = "select distinct Publisher from books where Publisher LIKE '%" . $_POST['pubNameFind'] . "%' ORDER BY Publisher ASC";
+    } else {
+        $pubQuery = "select distinct Publisher from books ORDER BY Publisher ASC";
+    }
+    $resultPubList = $conn->query($pubQuery);
+    $resultPubList2 = $conn->query($pubQuery);
+
 ?>
 <body>
     <div class="flex-container">
         <form class="sidebar" action="./books.php" method="POST">
             <div class="sidebar-title">Filter by: <input type="submit" value="apply" name="filterSubmit" class="filter-submit"></div>
+
+            <div class="sidebar-filter-item">
+                <div class="filter-title">Title</div>
+                <input type="text" class="searchbar-input" name="searchName" placeholder="Search for book title"/>
+            </div>
+
             <div class="sidebar-filter-item">
                 <div class="filter-title">Period</div>
                 <div class="year-wrap">
@@ -76,24 +107,24 @@
 
             <div class="sidebar-filter-item">
                 <div class="filter-title">Publisher <img src="./res/arrowIcon.png" onClick="showHide('publisher')" class="publisher-detailBtn"></div>
-                <div class="subj-form">
-                    <input type="text" name="publisherNameFind" placeholder="Search subject" class="subject-filter-search">
-                    <input type="submit" class="subj-filter-submit" value="search">
+                <div class="pub-form">
+                    <input type="text" name="pubNameFind" placeholder="Search Publisher" class="publisher-filter-search">
+                    <input type="submit" class="pub-filter-submit" value="search">
                 </div>
                 <span style="display: none;">
-                    <select id="subjects" name="publishers[]" multiple>
-                    <?php $j = 0;?>
-                    <?php while ($row = mysqli_fetch_assoc($resultSubjList2)) { ?>
-                        <option value="<?php echo $row['subject'];?>" id="_<?= $j++?>"><?php echo $row['subject'];?></option>
+                    <select id="publishers" name="publishers[]" multiple>
+                    <?php //$j = 0;?>
+                    <?php while ($row = mysqli_fetch_assoc($resultPubList2)) { ?>
+                        <option value="<?php echo $row['Publisher'];?>" id="_<?= $j++?>"><?php echo $row['Publisher'];?></option>
                     <?php } ?>
                     </select>
                 </span>
 
-                <ul class="subject-items">
-                <?php $i = 0;?>
-                <?php while ($row = mysqli_fetch_assoc($resultSubjList)) { ?>
+                <ul class="publisher-items">
+                <?php // $i = 0;?>
+                <?php while ($row = mysqli_fetch_assoc($resultPubList)) { ?>
                     <li class="subject-item" id="<?= $i?>" onClick="subjFilterClick('<?= $i++ ?>')">
-                        <?php echo $row['subject'];?>
+                        <?php echo $row['Publisher'];?>
                     </li>
                 <?php } ?>
                 </ul>
@@ -106,10 +137,10 @@
 
             <div class="search-section">
                 <span class="search-wrap">
-                    <div class="search-bar">
+                    <!-- <div class="search-bar">
                         <span class="search-icon"><img src="./res/searchIcon.png" alt=""></span>
-                        <input type="text" class="searchbar-input" name="search-name" placeholder="Search for book title"/>
-                    </div>
+                            <input type="text" class="searchbar-input" name="searchName" placeholder="Search for book title"/>
+                    </div> -->
                     <!-- <div class="search-type">
                         <span class="search-type-title">Search by:</span>
                         <ul class="search-type-item">
@@ -122,7 +153,7 @@
             </div>
             <div class="tableWrap">
                 <div class="table">
-                    <table>
+                    <table id="clickableTable">
                         <thead>
                             <tr>
                                 <th>Title</th> <th>Subject</th> <th>Publisher</th> <th>Period</th>
@@ -130,7 +161,7 @@
                         </thead>
                         <tbody>
                         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-                            <tr>
+                            <tr data-href="<?= $row['link']?>">
                                 <td><?php echo $row['title'];?></td> 
                                 <td><?php echo $row['Subject'];?></td> 
                                 <td><?php echo $row['Publisher'];?></td> 
@@ -169,5 +200,18 @@
             detailDiv.style.display = 'none';
         }
     }
+    document.addEventListener("DOMContentLoaded", function() {
+        var table = document.getElementById("clickableTable");
+        var rows = table.getElementsByTagName("tr");
+
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].addEventListener("click", function() {
+                var link = this.getAttribute("data-href");
+                if (link) {
+                    window.location.href = link;
+                }
+            });
+        }
+    });
 </script>
 </html>
