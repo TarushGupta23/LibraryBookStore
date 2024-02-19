@@ -23,8 +23,13 @@ if(isset($_POST['addExcel'])) {
     $inputFileNamePath = $_FILES['addDataFile']['tmp_name'];
     $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileNamePath);
     $data = $spreadsheet->getActiveSheet()->toArray();
+    $count = "1";
 
     foreach($data as $row) {
+        if ($count == "1") {
+            $count = "2";
+            continue;
+        }
         $title = $row['1'];
         $period = $row['2'];
         $subject = $row['3'];
@@ -61,16 +66,9 @@ if(isset($_POST['removeExcel'])) {
         $dateArray = explode('-', $period);
         $periodFrom = $dateArray[0];
         $periodTo = $dateArray[1];
-        $queryCheck = "select publisher from books where title='$title' and publisher='$publisher'";
-        $result = $conn->query($queryCheck);
-        if ($title != "") {
-            if ($result->num_rows != 0) {
-                $queryDelete = "DELETE FROM books WHERE title = '$title' AND publisher = '$publisher'";
-                $conn->query($queryDelete);
-            }
-            $query = "insert into books values ('$title',  '$periodFrom', '$periodTo', '$subject', '$publisher', '$link')";
-            $conn->query($query);
-        }
+
+        $query = "DELETE FROM books WHERE title = '$title' AND publisher = '$publisher'";
+        $result = $conn->query($query);
     }
     unset($_POST['removeExcel']);
 }

@@ -113,7 +113,7 @@ body {
     font-weight: bold;
     text-shadow: 4px 4px 0px var(--primary-color);
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--primary-d-color);
@@ -135,6 +135,12 @@ body {
     outline: none;
     box-shadow: 3px 3px 3px var(--primary-color);
 }
+.filter-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-self: center;
+}
 .year-wrap {
     display: flex;
     align-items: center; justify-content: space-between;
@@ -145,6 +151,8 @@ body {
     flex-wrap: wrap;
     gap: 8px;
     list-style: none;
+    max-height: 177px;
+    overflow-x: scroll;
 }
 .subject-item, .publisher-item {
     box-shadow: 3px 3px 3px var(--primary-color);
@@ -195,8 +203,9 @@ body {
 .filter-submit {
     border: none;
     background-color: var(--secondary-color);
-    font-size: 16px;
-    padding: 2px 14px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 1px 14px;
     border-radius: 100px;
     box-shadow: 3px 3px 0px var(--primary-color);
     cursor: pointer;

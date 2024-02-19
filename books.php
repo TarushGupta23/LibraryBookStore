@@ -8,6 +8,26 @@
 </head>
 <?php include './partials/connection.php'; ?>
 <?php
+
+// --------------------------------------------------------------------------------------------------------
+    if (isset($_POST['subjNameFind']) && $_POST['subjNameFind'] != "") {
+        $subjQuery = "select distinct subject from books where subject LIKE '%" . $_POST['subjNameFind'] . "%' ORDER BY subject ASC";
+        $subjNameCondition = "subject LIKE '%" . $_POST['subjNameFind'] . "%'";
+    } else {
+        $subjQuery = "select distinct subject from books ORDER BY subject ASC";
+        $subjNameCondition = "1";
+    }
+    $resultSubjList = $conn->query($subjQuery);
+    $resultSubjList2 = $conn->query($subjQuery);
+
+    if (isset($_POST['pubNameFind']) && $_POST['pubNameFind'] != "") {
+        $pubQuery = "select distinct Publisher from books where Publisher LIKE '%" . $_POST['pubNameFind'] . "%' ORDER BY Publisher ASC";
+    } else {
+        $pubQuery = "select distinct Publisher from books ORDER BY Publisher ASC";
+    }
+    $resultPubList = $conn->query($pubQuery);
+    $resultPubList2 = $conn->query($pubQuery);
+// --------------------------------------------------------------------------------------------------------
     if ($_POST["yearFrom"] != "" && $_POST["yearTo"] != "") {
         $query = "Select * from books where periodFrom >= " . $_POST['yearFrom'] . " and periodTo <= " . $_POST['yearTo'];
     } else if ($_POST["yearBetween"] != "") {
@@ -39,31 +59,20 @@
     } else {
         $nameCondition = "1";
     }
-    $queryFinal = $query . " and " . $condition . " and " . $condition2 . " and " . $nameCondition;
+    $queryFinal = $query . " and " . $condition . " and " . $condition2 . " and " . $nameCondition . " and " . $subjNameCondition;
     $result = $conn->query($queryFinal);
 
-// --------------------------------------------------------------------------------------------------------
-    if (isset($_POST['subjNameFind']) && $_POST['subjNameFind'] != "") {
-        $subjQuery = "select distinct subject from books where subject LIKE '%" . $_POST['subjNameFind'] . "%' ORDER BY subject ASC";
-    } else {
-        $subjQuery = "select distinct subject from books ORDER BY subject ASC";
-    }
-    $resultSubjList = $conn->query($subjQuery);
-    $resultSubjList2 = $conn->query($subjQuery);
-
-    if (isset($_POST['pubNameFind']) && $_POST['pubNameFind'] != "") {
-        $pubQuery = "select distinct Publisher from books where Publisher LIKE '%" . $_POST['pubNameFind'] . "%' ORDER BY Publisher ASC";
-    } else {
-        $pubQuery = "select distinct Publisher from books ORDER BY Publisher ASC";
-    }
-    $resultPubList = $conn->query($pubQuery);
-    $resultPubList2 = $conn->query($pubQuery);
 
 ?>
 <body>
     <div class="flex-container">
         <form class="sidebar" action="./books.php" method="POST">
-            <div class="sidebar-title">Filter by: <input type="submit" value="apply" name="filterSubmit" class="filter-submit"></div>
+            <div class="sidebar-title">Filter by: 
+                <div class="filter-btn-container">
+                    <input type="submit" value="apply" name="filterSubmit" class="filter-submit">
+                    <input type="submit" value="Clear" name="filterSubmit" class="filter-submit">
+                </div>
+            </div>
 
             <div class="sidebar-filter-item">
                 <div class="filter-title">Title</div>

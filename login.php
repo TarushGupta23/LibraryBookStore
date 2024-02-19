@@ -13,20 +13,20 @@ if (isset($_POST['login'])) {
         $_SESSION['admin'] = "true";
         header("Location: ./adminPanel.php");
     }
-} else if (isset($_POST['signup'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+// } else if (isset($_POST['signup'])) {
+//     $username = $_POST['username'];
+//     $password = $_POST['password'];
     
-    $sql = "SELECT password FROM admin WHERE username = '$username'";
-    $result = $conn->query($sql);
-    if ($result->num_rows == 0) {
-        $sql = "insert into admin values('$username','$password')";
-        $result = $conn->query($sql);
-        $_SESSION['admin'] = "true";
-        header("Location: ./adminPanel.php");
-    } else {
-        $_SESSION['message'] = "User already exists";
-    }
+//     $sql = "SELECT password FROM admin WHERE username = '$username'";
+//     $result = $conn->query($sql);
+//     if ($result->num_rows == 0) {
+//         $sql = "insert into admin values('$username','$password')";
+//         $result = $conn->query($sql);
+//         $_SESSION['admin'] = "true";
+//         header("Location: ./adminPanel.php");
+//     } else {
+//         $_SESSION['message'] = "User already exists";
+//     }
 }
 ?>
 <link rel="stylesheet" href="style/login.css">
@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
         </span>
         <div class="btns">
             <input type="submit" value="Login" name="login" class='input-button'>
-            <input type="submit" value="New Admin" name="signup" class='input-button'>
+            <!-- <input type="submit" value="New Admin" name="signup" class='input-button'> -->
         </div>
     </form>
 </div>
