@@ -70,7 +70,7 @@
             <div class="sidebar-title">Filter by: 
                 <div class="filter-btn-container">
                     <input type="submit" value="apply" name="filterSubmit" class="filter-submit">
-                    <input type="submit" value="Clear" name="filterSubmit" class="filter-submit">
+                    <input type="submit" value="Clear" name="filterSubmit" class="filter-submit"> <!-- they both do same thing but for ease of user to reset, clear button is added -->
                 </div>
             </div>
 
@@ -146,6 +146,7 @@
 
             <div class="search-section">
                 <span class="search-wrap">
+                    <!-- This was the search by title menu which was supposed to be on top as navbar but i placed it at side now -->
                     <!-- <div class="search-bar">
                         <span class="search-icon"><img src="./res/searchIcon.png" alt=""></span>
                             <input type="text" class="searchbar-input" name="searchName" placeholder="Search for book title"/>
